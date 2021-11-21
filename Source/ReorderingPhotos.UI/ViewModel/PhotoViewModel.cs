@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReorderingPhotos.CoreLib
+namespace ReorderingPhotos.UI.ViewModel
 {
-    public class Class1
+    class PhotoViewModel
     {
     }
 }
