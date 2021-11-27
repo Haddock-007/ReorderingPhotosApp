@@ -4,18 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ReorderingPhotos.UI"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView ItemsSource="{Binding PhotosList}"  >
+        <ListView ItemsSource="{Binding PhotosCollection}" dd:DragDrop.IsDragSource="True"  dd:DragDrop.IsDropTarget="True" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
-                        <Image Source="{Binding PhotoPath}" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                        <Image Source="{Binding PhotoPath}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250"   />
+                        <TextBlock Text="{Binding Filename}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                        <TextBlock Text="{Binding ShootingTime}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>    
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
+            RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+            ItemWidth="{Binding (ListView.View).ItemWidth, 
+            RelativeSource={RelativeSource AncestorType=ListView}}"
+            MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+            ItemHeight="{Binding (ListView.View).ItemHeight, 
+            RelativeSource={RelativeSource AncestorType=ListView}}" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+        
     </Grid>
 </UserControl>

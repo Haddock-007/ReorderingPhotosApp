@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ReorderingPhotos.UI.ViewModel;
+using System.Configuration;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace ReorderingPhotos.UI
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+namespace ReorderingPhotos.UI {
+
     public partial class MainWindow : Window
     {
+
+        ListPhotosViewModel listPhotosVM;
         public MainWindow()
         {
+            listPhotosVM = new ListPhotosViewModel();
+            
+            
             InitializeComponent();
+            photosList.DataContext = listPhotosVM;
+            photoSizeTextBox.DataContext = this;
+            string[] files = Directory.GetFiles(ConfigurationManager.AppSettings.Get("photos_dir"));
+            listPhotosVM.SetPhotos(files);
         }
+
+        public string PhotosSize { get; set; }
+
     }
 }
