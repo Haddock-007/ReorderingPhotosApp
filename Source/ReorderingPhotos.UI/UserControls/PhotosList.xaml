@@ -12,7 +12,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
-                        <Image Source="{Binding PhotoPath}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250"   />
+                        <Image Source="{Binding PhotoImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding PhotoDimensions.Width}"   />
                         <TextBlock Text="{Binding Filename}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                         <TextBlock Text="{Binding ShootingTime}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                     </StackPanel>

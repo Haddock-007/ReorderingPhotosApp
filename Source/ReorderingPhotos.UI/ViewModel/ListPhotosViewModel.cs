@@ -34,5 +34,15 @@ namespace ReorderingPhotos.UI.ViewModel {
             
 
         }
+
+        internal DateTime GetLowestShootingTime() {
+            if (PhotosCollection.Count > 0) {
+                return PhotosCollection[0].ShootingTime;
+            }
+            else {
+                return DateTime.Now;
+            }
+            
+        }
     }
 }
