@@ -78,6 +78,10 @@ namespace ReorderingPhotos.UI.ViewModel {
             NotifyPropertyChanged("PhotoPath");
         }
 
+        internal void RenameFile(string tempFilename) {
+            PhotoObj.RenameFile(tempFilename);
+        }
+
         public System.Windows.Rect PhotoDimensions {
             get; set;
         }

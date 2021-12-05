@@ -29,7 +29,7 @@ namespace ReorderingPhotos.CoreLib
             RenameFile(fileName);
         }
 
-        private void RenameFile(string newFileName)
+        public void RenameFile(string newFileName)
         {
             string oldFilename = FileName;
             string newFileFullPath = FileFullPath.Replace(oldFilename, newFileName);
