@@ -7,15 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="376*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <usercontrols:PhotosList x:Name="photosList"   Grid.Row="1"  />
-        <Button x:Name="selectFolderButton" Content="Select folder"  Click="selectFolderButton_Click" Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Left" />
-        <!--<TextBox x:Name="photoSizeTextBox"  Text="{Binding PhotosSize}" Grid.Row="0"  />-->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+            <Button x:Name="selectFolderButton" Content="Select folder"  Click="selectFolderButton_Click" Margin="20,0,0,0" HorizontalAlignment="Left" />
+            <TextBlock Text="Size ratio" VerticalAlignment="Center" Margin="40,0,0,0" />
+            <TextBox x:Name="photoSizeTextBox"  Text="{Binding PhotosDimensionRatio,Mode=TwoWay}" Margin="4,0,0,0" Width="80"  VerticalAlignment="Center" />
+        </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <TextBlock Text="From" VerticalAlignment="Center" Margin="20,0" />
             <DatePickerTextBox x:Name="datePicker" Text="{Binding SelectedDate}"  VerticalAlignment="Center" Margin="0,0,20,0" />

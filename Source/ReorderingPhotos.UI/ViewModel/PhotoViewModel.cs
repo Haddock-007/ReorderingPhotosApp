@@ -14,7 +14,7 @@ namespace ReorderingPhotos.UI.ViewModel {
 
     public class PhotoViewModel : INotifyPropertyChanged {
 
-        private const double PhotoDimensionRatio = 0.1;
+        public double PhotoDimensionRatio { get; set; }
 
         public void SetPhoto(string fileName) {
             PhotoObj = new Photo();
@@ -47,16 +47,24 @@ namespace ReorderingPhotos.UI.ViewModel {
             }
         }
 
+
         public BitmapImage PhotoImage {
             get {
-                Uri uri = new Uri(PhotoPath);
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                bitmapImage.UriSource = uri;
-                bitmapImage.EndInit();
-                return bitmapImage;
+                //Uri uri = new Uri(PhotoPath);
+
+                using (var stream = new FileStream(PhotoPath, FileMode.Open, FileAccess.Read)) {
+
+                    BitmapImage bitmapImage = new BitmapImage();
+                    
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    //bitmapImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    //bitmapImage.UriSource = uri;
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                    return bitmapImage;
+                }
             }
         }
 

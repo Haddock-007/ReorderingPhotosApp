@@ -1,14 +1,13 @@
-﻿using ReorderingPhotos.CoreLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReorderingPhotos.UI.ViewModel {
     public class ListPhotosViewModel {
 
+
+        
         public ListPhotosViewModel() {
             PhotosCollection = new ObservableCollection<PhotoViewModel>();
         }
@@ -18,22 +17,25 @@ namespace ReorderingPhotos.UI.ViewModel {
         }
 
         internal void SetPhotos(string[] files) {
-
+            PhotosCollection.Clear();
             List<PhotoViewModel> photosList = new List<PhotoViewModel>();
 
             foreach (string photoFilename in files) {
                 PhotoViewModel photoViewModel = new PhotoViewModel();
+                photoViewModel.PhotoDimensionRatio = PhotosDimensionRatio;
                 photoViewModel.SetPhoto(photoFilename);
                 photosList.Add(photoViewModel);
             }
             photosList=photosList.OrderBy(x => x.ShootingTime).ToList();
-            PhotosCollection.Clear();
+            
             foreach (PhotoViewModel photoVM in photosList) {
                 PhotosCollection.Add(photoVM);
             }
             
 
         }
+
+        public double PhotosDimensionRatio { get; set; }
 
         internal DateTime GetLowestShootingTime() {
             if (PhotosCollection.Count > 0) {
