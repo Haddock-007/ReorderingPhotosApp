@@ -1,7 +1,6 @@
 ﻿using ReorderingPhotos.UI.ViewModel;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
@@ -9,19 +8,20 @@ using System.Windows.Forms;
 namespace ReorderingPhotos.UI {
 
     public partial class MainWindow : Window, INotifyPropertyChanged {
-
         public ListPhotosViewModel ListPhotosVM { get; set; }
+
         public MainWindow() {
             ListPhotosVM = new ListPhotosViewModel();
             ListPhotosVM.PhotosDimensionRatio = 0.05;
+
             InitializeComponent();
             photosList.DataContext = ListPhotosVM;
             this.DataContext = this;
             photoSizeTextBox.DataContext = ListPhotosVM;
         }
 
-
         private DateTime m_SelectedDate;
+
         public DateTime SelectedDate {
             get {
                 return m_SelectedDate;
@@ -29,7 +29,6 @@ namespace ReorderingPhotos.UI {
             set {
                 m_SelectedDate = value;
                 NotifyPropertyChanged("SelectedDate");
-
             }
         }
 
@@ -39,8 +38,6 @@ namespace ReorderingPhotos.UI {
 
         public string PhotosSize { get; set; }
 
-
-
         private void selectFolderButton_Click(object sender, RoutedEventArgs e) {
             ListPhotosVM.PhotosCollection.Clear();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -49,7 +46,6 @@ namespace ReorderingPhotos.UI {
             }
             folderBrowserDialog.ShowDialog();
 
-            
             if (!string.IsNullOrEmpty(folderBrowserDialog.SelectedPath)) {
                 string[] files = Directory.GetFiles(folderBrowserDialog.SelectedPath);
                 ListPhotosVM.SetPhotos(files);
@@ -62,7 +58,6 @@ namespace ReorderingPhotos.UI {
         private void setShootingTimeButton_Click(object sender, RoutedEventArgs e) {
             double inc = 0;
 
-            
             foreach (PhotoViewModel photoViewModel in ListPhotosVM.PhotosCollection) {
                 DateTime newDateTime = m_SelectedDate.AddMinutes(inc);
                 photoViewModel.PhotoObj.ChangeShootingTime(newDateTime);
@@ -76,8 +71,6 @@ namespace ReorderingPhotos.UI {
                 photoViewModel.RenameFileByShootingTime(i);
                 i += 1;
             }
-
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -26,8 +26,15 @@ namespace ReorderingPhotos.UI.ViewModel {
         private void SetPhotoMetadata() {
             using (FileStream fs = new FileStream(PhotoObj.FileFullPath, FileMode.Open, FileAccess.Read)) {
                 using (Image myImage = Image.FromStream(fs, false, false)) {
-                    PropertyItem propItem = myImage.GetPropertyItem(36867);
-                    string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                    string dateTaken;
+                    try {
+                        PropertyItem propItem = myImage.GetPropertyItem(36867);
+                        dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                        
+                    }
+                    catch {
+                        dateTaken = DateTime.MinValue.ToString();
+                    }
                     PhotoObj.ShootingTime = DateTime.Parse(dateTaken);
 
                     double width = PhotoDimensionRatio * myImage.PhysicalDimension.Width;

@@ -125,5 +125,10 @@
   <ItemGroup>
     <Resource Include="Resource\Icon\2561351_camera_icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\photo\photoWithDateTakenExifProp.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
