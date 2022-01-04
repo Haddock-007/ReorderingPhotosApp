@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -47,7 +48,7 @@ namespace ReorderingPhotos.UI {
             folderBrowserDialog.ShowDialog();
 
             if (!string.IsNullOrEmpty(folderBrowserDialog.SelectedPath)) {
-                string[] files = Directory.GetFiles(folderBrowserDialog.SelectedPath);
+                string[] files = Directory.GetFiles(folderBrowserDialog.SelectedPath,"*.*").Where(file => file.ToLower().EndsWith("jpg") || file.ToLower().EndsWith("jpeg")).ToArray(); 
                 ListPhotosVM.SetPhotos(files);
                 SelectedDate = ListPhotosVM.GetLowestShootingTime();
             }

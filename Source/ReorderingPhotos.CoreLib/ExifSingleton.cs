@@ -24,10 +24,12 @@ namespace ReorderingPhotos.CoreLib {
             using (Image image = new Bitmap(localFileWithDateTakenExifProp)) {
                 PropertyItem[] propItems = image.PropertyItems;
                 Encoding _Encoding = Encoding.UTF8;
-                DataTakenProperty_Default = propItems.Where(a => a.Id.ToString("x") == "9004").FirstOrDefault();
+                DataTakenProperty1_Default = propItems.Where(a => a.Id.ToString("x") == "9004").FirstOrDefault();
+                DataTakenProperty2_Default = propItems.Where(a => a.Id.ToString("x") == "9003").FirstOrDefault();
             }
         }
 
-        public System.Drawing.Imaging.PropertyItem DataTakenProperty_Default { get; private set; }
+        public System.Drawing.Imaging.PropertyItem DataTakenProperty1_Default { get; private set; }
+        public System.Drawing.Imaging.PropertyItem DataTakenProperty2_Default { get; private set; }
     }
 }

@@ -49,20 +49,23 @@ namespace ReorderingPhotos.CoreLib {
                 PropertyItem[] propItems = image.PropertyItems;
                 Encoding _Encoding = Encoding.UTF8;
                 var DataTakenProperty1 = propItems.Where(a => a.Id.ToString("x") == "9004").FirstOrDefault();
-                //var DataTakenProperty2 = propItems.Where(a => a.Id.ToString("x") == "9003").FirstOrDefault();
+                var DataTakenProperty2 = propItems.Where(a => a.Id.ToString("x") == "9003").FirstOrDefault();
 
                 if (DataTakenProperty1 == null) {  //undefined
-                    DataTakenProperty1 = ExifSingleton.Instance.DataTakenProperty_Default;
+                    DataTakenProperty1 = ExifSingleton.Instance.DataTakenProperty1_Default;
+                }
+                if (DataTakenProperty2 == null) {  //undefined
+                    DataTakenProperty2 = ExifSingleton.Instance.DataTakenProperty2_Default;
                 }
 
-                string originalDateString = _Encoding.GetString(DataTakenProperty1.Value);
-                originalDateString = originalDateString.Remove(originalDateString.Length - 1);
+                //string originalDateString = _Encoding.GetString(DataTakenProperty1.Value);
+                //originalDateString = originalDateString.Remove(originalDateString.Length - 1);
 
 
                 DataTakenProperty1.Value = _Encoding.GetBytes(newDateTime.ToString("yyyy:MM:dd HH:mm:ss") + '\0');
-               // DataTakenProperty2.Value = _Encoding.GetBytes(newDateTime.ToString("yyyy:MM:dd HH:mm:ss") + '\0');
+                DataTakenProperty2.Value = _Encoding.GetBytes(newDateTime.ToString("yyyy:MM:dd HH:mm:ss") + '\0');
                 image.SetPropertyItem(DataTakenProperty1);
-                //image.SetPropertyItem(DataTakenProperty2);
+                image.SetPropertyItem(DataTakenProperty2);
                 image.Save(FileFullPath);
 
                 image.Dispose();
